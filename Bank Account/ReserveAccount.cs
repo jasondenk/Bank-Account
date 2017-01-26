@@ -11,7 +11,7 @@ namespace Bank_Account
         //fields
         private double withdrawl;
         private double deposit;
-        private double balance;
+        private double balance=0;
 
         //properties
         protected double Withdrawl
@@ -37,11 +37,27 @@ namespace Bank_Account
         }
 
         //methods
-        public override void ShowInfo()
+        //Shows Account  name/number
+        public override string ShowInfo()
         {
-            base.ShowInfo();
+            return base.ShowInfo() + "\nAccount Type: " + "Reserve";
+        }
+        //Shows balance
+        protected void ShowBalance()
+        {            
             Console.WriteLine("Reserve Account Balance: " + Balance);
-
+        }
+        //returns string with deposit/balance
+        public string DepositMoney()
+        {
+            balance = Balance + Deposit;
+            return "+$" + Deposit + "\tChecking Account Balance: " + balance;
+        }
+        //returns string with withdrawl/balance
+        public string WithdrawMoney()
+        {
+            balance = Balance - Withdrawl;
+            return "-$" + Withdrawl + "\tChecking Account Balance: " + balance;
         }
     }
 }
