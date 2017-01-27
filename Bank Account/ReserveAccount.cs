@@ -14,12 +14,12 @@ namespace Bank_Account
         private double balance=0;
 
         //properties
-        protected double Withdrawl
+        public double Withdrawl
         {
             get { return this.withdrawl; }
             set { this.withdrawl = value; }
         }
-        protected double Deposit
+        public double Deposit
         {
             get { return this.deposit; }
             set { this.deposit = value; }
@@ -38,14 +38,14 @@ namespace Bank_Account
 
         //methods
         //Shows Account  name/number
-        public override string ShowInfo()
+        public string ShowReserveInfo()
         {
             return base.ShowInfo() + "\nAccount Type: " + "Reserve";
         }
         //Shows balance
-        protected void ShowBalance()
-        {            
-            Console.WriteLine("Reserve Account Balance: " + Balance);
+        public string ShowBalance()
+        {
+            return "Reserve Account Balance: $" + Balance;
         }
         //returns string with deposit/balance
         public string DepositMoney()

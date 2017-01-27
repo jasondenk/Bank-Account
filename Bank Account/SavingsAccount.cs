@@ -11,15 +11,15 @@ namespace Bank_Account
         //fields
         private double withdrawl;
         private double deposit;
-        private double balance;
+        private double balance=0;
 
         //properties
-        protected double Withdrawl
+        public double Withdrawl
         {
             get { return this.withdrawl; }
             set { this.withdrawl = value; }
         }
-        protected double Deposit
+        public double Deposit
         {
             get { return this.deposit; }
             set { this.deposit = value; }
@@ -37,10 +37,26 @@ namespace Bank_Account
         }
 
         //methods
-        public override void ShowInfo()
+        //Shows Account  name/number
+        public string ShowSavingsInfo()
         {
-            base.ShowInfo();
-            Console.WriteLine("Savings Account Balance: " + Balance);
+            return base.ShowInfo() + "\nAccount Type: " + "Savings";
+        }
+        public string ShowBalance()
+        {
+            return "Savings Account Balance: $" + Balance;
+        }
+        //returns string with deposit/balance
+        public string DepositMoney()
+        {
+            balance = Balance + Deposit;
+            return "+$" + Deposit + "\tChecking Account Balance: " + balance;
+        }
+        //returns string with withdrawl/balance
+        public string WithdrawMoney()
+        {
+            balance = Balance - Withdrawl;
+            return "-$" + Withdrawl + "\tChecking Account Balance: " + balance;
         }
     }
 }

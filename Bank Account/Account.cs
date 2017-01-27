@@ -9,10 +9,9 @@ namespace Bank_Account
     class Account
     {
         //fields
-        private string firstName;
-        private string lastName;
-        private string fullName;
-        private int accountNumber;
+        private string firstName = "Yogi";
+        private string lastName = "Bear";        
+        private int accountNumber= 12345678;
 
         //properties
         public string FirstName
@@ -25,11 +24,7 @@ namespace Bank_Account
             get { return this.lastName; }
             set { this.lastName = value; }
         }
-        public string FullName
-        {
-            get { return this.fullName; }
-            set { this.fullName = FirstName + " " + LastName; }
-        }
+        
         public int AccountNumber
         {
             get { return this.accountNumber; }
@@ -37,13 +32,15 @@ namespace Bank_Account
         }
 
         //constructors
+        public Account()
+        { }
 
         //methods
-        public virtual void ShowInfo()
+        public string ShowInfo()
         {
-            Console.WriteLine("Owner: " + FullName);
-            Console.WriteLine("Account Number: " + AccountNumber);
+            return "Name: " + FirstName+" "+LastName + "\nAccount Number: " + AccountNumber ;
         }
+
 
     }
 }
