@@ -40,23 +40,23 @@ namespace Bank_Account
         //Shows Account  name/number
         public string ShowSavingsInfo()
         {
-            return base.ShowInfo() + "\nAccount Type: " + "Savings";
+            return base.ShowInfo() + "   " + "\nAccount Type: " + "Savings";
         }
         public string ShowBalance()
         {
-            return "Savings Account Balance: $" + Balance;
+            return "Savings Account Balance: $" + String.Format("{0:0.00}", Balance);
         }
         //returns string with deposit/balance
         public string DepositMoney()
         {
             balance = Balance + Deposit;
-            return "+$" + Deposit + "\tChecking Account Balance: " + balance;
+            return "+$" + String.Format("{0:0.00}", Deposit) + "\tChecking Account Balance: $" + String.Format("{0:0.00}", Balance);
         }
         //returns string with withdrawl/balance
         public string WithdrawMoney()
         {
             balance = Balance - Withdrawl;
-            return "-$" + Withdrawl + "\tChecking Account Balance: " + balance;
+            return "-$" + String.Format("{0:0.00}", Withdrawl) + "\tChecking Account Balance: $" + String.Format("{0:0.00}", Balance);
         }
     }
 }

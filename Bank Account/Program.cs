@@ -17,17 +17,17 @@ namespace Bank_Account
             CheckingAccount checkingAccount = new CheckingAccount();
             // Create an instance of StreamWriter to write to a Checking Account file
             StreamWriter checking = new StreamWriter(@"C:\Users\WeCanCodeIT\Documents\Visual Studio 2015\Projects\Bank Account\Bank Account\bin\Debug\CheckingAccount.txt");
-            //the using statement will auto-close the file for us
+            //writes name and account number automatically when program starts, the using statement will auto-close the file for us
             using (checking)
             {
                 //write name and account #
-                checking.WriteLine(checkingAccount.ShowInfo());
+                checking.WriteLine(checkingAccount.ShowCheckingInfo());
             }
             //instantiate Savings Account
             SavingsAccount savingsAccount = new SavingsAccount();
             // Create an instance of StreamWriter to write to a file
             StreamWriter savings = new StreamWriter(@"C:\Users\WeCanCodeIT\Documents\Visual Studio 2015\Projects\Bank Account\Bank Account\bin\Debug\SavingsAccount.txt");
-            //the using statement will auto-close the file for us
+            //writes name and account number automatically when program starts, the using statement will auto-close the file for us
             using (savings)
             {
                 //write name and account #
@@ -37,7 +37,7 @@ namespace Bank_Account
             CheckingAccount reserveAccount = new CheckingAccount();
             // Create an instance of StreamWriter to write to a file
             StreamWriter reserve = new StreamWriter(@"C:\Users\WeCanCodeIT\Documents\Visual Studio 2015\Projects\Bank Account\Bank Account\bin\Debug\ReserveAccount.txt");
-            //the using statement will auto-close the file for us
+            //writes name and account number automatically when program starts, the using statement will auto-close the file for us
             using (reserve)
             {
                 //write name and account #
@@ -46,8 +46,8 @@ namespace Bank_Account
 
         //goto Start if invalid response
         Start:;
-            //User Interface
             string input = "";
+            //User Interface
             while (input != "5")
             {
                 Console.Clear();
@@ -68,6 +68,7 @@ namespace Bank_Account
                     Console.ReadKey();
                     goto Start;
                 }
+                //Show Account name and number
                 if (input == "1")
                 {
                     Console.WriteLine(account.ShowInfo());
@@ -75,6 +76,7 @@ namespace Bank_Account
                     Console.ReadKey();
                 }
                 string accountBalance;
+                //Show account balance
                 if (input == "2")
                 {
                     Console.Clear();
@@ -109,6 +111,7 @@ namespace Bank_Account
                     }
                 }
                 string depositWithdraw;
+                //deposit or withdraw
                 if (input == "3" || input == "4")
                 {
                     Console.Clear();
@@ -124,67 +127,138 @@ namespace Bank_Account
                         Console.ReadKey();
                         goto Start;
                     }
+                    //deposit/withdraw from checking
                     if (depositWithdraw == "1")
                     {
+                        //deposit
                         if (input == "3")
                         {
-                            Console.WriteLine("Type amount to deposit and press enter:");
-                            checkingAccount.Deposit = double.Parse(Console.ReadLine());
+                            CheckingDeposit:;
+                            Console.WriteLine("Type amount to deposit to checking account and press enter:");
+                            string transaction = Console.ReadLine();
+                            double toDouble;
+                            //checks for valid deposit
+                            if(double.TryParse(transaction, out toDouble)==false||double.Parse(transaction)<0)
+                            {
+                                Console.WriteLine("Enter a valid deposit.");
+                                Console.WriteLine("\nPress any key to continue.");
+                                Console.ReadKey();
+                                Console.Clear();
+                                goto CheckingDeposit;
+                            }
+                            //updates deposit value in Checking Account Class                            
+                            checkingAccount.Deposit = double.Parse(transaction);
                             using (checking = File.AppendText(@"C:\Users\WeCanCodeIT\Documents\Visual Studio 2015\Projects\Bank Account\Bank Account\bin\Debug\CheckingAccount.txt"))
                             {
-                                //add deposit/withdrawl and update balance
+                                //deposit and update balance
                                 checking.WriteLine(DateTime.Now);
                                 checking.WriteLine(checkingAccount.DepositMoney());
                             }
-
                         }
+                        //withdraw
                         else if (input == "4")
                         {
-                            Console.WriteLine("Type amount to withdraw and press enter:");
-                            checkingAccount.Withdrawl = double.Parse(Console.ReadLine());
+                            CheckingWithdrawl:;
+                            Console.WriteLine("Type amount to withdraw from checking account and press enter:");
+                            string transaction = Console.ReadLine();
+                            double toDouble;
+                            //checks for valid deposit
+                            if(double.TryParse(transaction, out toDouble)==false || double.Parse(transaction) < 0)
+                            {
+                                Console.WriteLine("Enter a valid amount to withdraw.");
+                                Console.WriteLine("\nPress any key to continue.");
+                                Console.ReadKey();
+                                Console.Clear();
+                                goto CheckingWithdrawl;
+                            }
+                            //updates withdrawl value in Checking Account Class
+                            checkingAccount.Withdrawl = double.Parse(transaction);
                             using (checking = File.AppendText(@"C:\Users\WeCanCodeIT\Documents\Visual Studio 2015\Projects\Bank Account\Bank Account\bin\Debug\CheckingAccount.txt"))
                             {
-                                //add deposit/withdrawl and update balance
+                                //withdrawl and update balance
                                 checking.WriteLine(DateTime.Now);
                                 checking.WriteLine(checkingAccount.WithdrawMoney());
                             }
                         }
                     }
+                    //deposit/withdraw from reserve account
                     else if (depositWithdraw == "2")
                     {
+                        //deposit
                         if (input == "3")
                         {
+                        ReserveDeposit:;
                             Console.WriteLine("Type amount to deposit to reserve account and press enter:");
-                            reserveAccount.Deposit = double.Parse(Console.ReadLine());
+                            string transaction = Console.ReadLine();
+                            double toDouble;
+                            //checks for valid deposit
+                            if (double.TryParse(transaction, out toDouble) == false || double.Parse(transaction) < 0)
+                            {
+                                Console.WriteLine("Enter a valid deposit.");
+                                Console.WriteLine("\nPress any key to continue.");
+                                Console.ReadKey();
+                                Console.Clear();
+                                goto ReserveDeposit;
+                            }
+                            //updates deposit value in Reserve Account Class                            
+                            reserveAccount.Deposit = double.Parse(transaction);                            
                             using (reserve = File.AppendText(@"C:\Users\WeCanCodeIT\Documents\Visual Studio 2015\Projects\Bank Account\Bank Account\bin\Debug\ReserveAccount.txt"))
                             {
-                                //add deposit/withdrawl and update balance
+                                //deposit and update balance
                                 reserve.WriteLine(DateTime.Now);
                                 reserve.WriteLine(reserveAccount.DepositMoney());
                             }
 
                         }
+                        //withdraw
                         else if (input == "4")
                         {
+                        ReserveWithdrawl:;
                             Console.WriteLine("Type amount to withdraw from reserve account and press enter:");
-                            reserveAccount.Withdrawl = double.Parse(Console.ReadLine());
+                            string transaction = Console.ReadLine();
+                            double toDouble;
+                            //checks for valid withdraw
+                            if (double.TryParse(transaction, out toDouble) == false || double.Parse(transaction) < 0)
+                            {
+                                Console.WriteLine("Enter a valid amount to withdraw.");
+                                Console.WriteLine("\nPress any key to continue.");
+                                Console.ReadKey();
+                                Console.Clear();
+                                goto ReserveWithdrawl;
+                            }
+                            //updates withdrawl value in Reserve Account Class
+                            reserveAccount.Withdrawl = double.Parse(transaction);                            
                             using (checking = File.AppendText(@"C:\Users\WeCanCodeIT\Documents\Visual Studio 2015\Projects\Bank Account\Bank Account\bin\Debug\ReserveAccount.txt"))
                             {
-                                //add deposit/withdrawl and update balance
+                                //withdrawl and update balance
                                 reserve.WriteLine(DateTime.Now);
                                 reserve.WriteLine(reserveAccount.WithdrawMoney());
                             }
                         }
                     }
+                    //deposit/withdraw from savings account
                     else if (depositWithdraw == "3")
                     {
                         if (input == "3")
                         {
+                        SavingsDeposit:;
                             Console.WriteLine("Type amount to deposit to savings account and press enter:");
-                            savingsAccount.Deposit = double.Parse(Console.ReadLine());
+                            string transaction = Console.ReadLine();
+                            double toDouble;
+                            //checks for valid deposit
+                            if (double.TryParse(transaction, out toDouble) == false || double.Parse(transaction) < 0)
+                            {
+                                Console.WriteLine("Enter a valid deposit.");
+                                Console.WriteLine("\nPress any key to continue.");
+                                Console.ReadKey();
+                                Console.Clear();
+                                goto SavingsDeposit;
+                            }
+                            //updates deposit value in Savings Account Class                            
+                            savingsAccount.Deposit = double.Parse(transaction);
                             using (savings = File.AppendText(@"C:\Users\WeCanCodeIT\Documents\Visual Studio 2015\Projects\Bank Account\Bank Account\bin\Debug\SavingsAccount.txt"))
                             {
-                                //add deposit/withdrawl and update balance
+                                //deposit and update balance
                                 savings.WriteLine(DateTime.Now);
                                 savings.WriteLine(savingsAccount.DepositMoney());
                             }
@@ -192,11 +266,24 @@ namespace Bank_Account
                         }
                         else if (input == "4")
                         {
-                            Console.WriteLine("Type amount to deposit to savings account and press enter:");
-                            savingsAccount.Withdrawl = double.Parse(Console.ReadLine());
+                        SavingsWithdrawl:;
+                            Console.WriteLine("Type amount to withdraw from savings account and press enter:");
+                            string transaction = Console.ReadLine();
+                            double toDouble;
+                            //checks for valid deposit
+                            if (double.TryParse(transaction, out toDouble) == false || double.Parse(transaction) < 0)
+                            {
+                                Console.WriteLine("Enter a valid amount to withdraw.");
+                                Console.WriteLine("\nPress any key to continue.");
+                                Console.ReadKey();
+                                Console.Clear();
+                                goto SavingsWithdrawl;
+                            }
+                            //updates withdrawl value in Savings Account Class
+                            savingsAccount.Withdrawl = double.Parse(transaction);                            
                             using (savings = File.AppendText(@"C:\Users\WeCanCodeIT\Documents\Visual Studio 2015\Projects\Bank Account\Bank Account\bin\Debug\SavingsAccount.txt"))
                             {
-                                //add deposit/withdrawl and update balance
+                                //withdrawl and update balance
                                 savings.WriteLine(DateTime.Now);
                                 savings.WriteLine(savingsAccount.WithdrawMoney());
                             }

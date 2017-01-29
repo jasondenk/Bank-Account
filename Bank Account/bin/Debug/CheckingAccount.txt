@@ -1,6 +1,5 @@
-Name: Yogi Bear
-Account Number: 12345678
-1/27/2017 1:17:38 PM
-+$99	Checking Account Balance: 99
-1/27/2017 1:17:57 PM
--$44	Checking Account Balance: 55
+Name: Yogi Bear    
+Account Number: 12345678   
+Account Type: Checking
+1/29/2017 1:53:46 PM
++$3.33	Checking Account Balance: $3.33

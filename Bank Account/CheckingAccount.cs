@@ -40,24 +40,24 @@ namespace Bank_Account
         //methods
         public string ShowCheckingInfo()
         {
-            return base.ShowInfo()+ "\nAccount Type: "+"Checking";
+            return base.ShowInfo()+ "   "+ "\nAccount Type: " + "Checking";
         }
         //Shows balance
         public string ShowBalance()
         {
-            return "Checking Account Balance: $" + Balance;
+            return "Checking Account Balance: $" + String.Format("{0:0.00}", Balance); 
         }
         //returns string with deposit/balance
         public string DepositMoney()
         {
             balance = Balance + Deposit;
-            return "+$" + Deposit + "\tChecking Account Balance: " + balance;
+            return "+$" + String.Format("{0:0.00}",Deposit) + "\tChecking Account Balance: $" + String.Format("{0:0.00}", Balance);
         }
         //returns string with withdrawl/balance
         public string WithdrawMoney()
         {
             balance = Balance - Withdrawl;
-            return "-$" + Withdrawl + "\tChecking Account Balance: " + balance;
+            return "-$" + String.Format("{0:0.00}", Withdrawl) + "\tChecking Account Balance: $" + String.Format("{0:0.00}", Balance);
         }
     }
 }

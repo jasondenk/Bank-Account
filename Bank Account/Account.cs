@@ -38,7 +38,7 @@ namespace Bank_Account
         //methods
         public string ShowInfo()
         {
-            return "Name: " + FirstName+" "+LastName + "\nAccount Number: " + AccountNumber ;
+            return "Name: " + FirstName+" "+LastName + "    "+ "\nAccount Number: " + AccountNumber ;
         }
 
 
