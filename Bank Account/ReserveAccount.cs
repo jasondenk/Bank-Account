@@ -40,7 +40,7 @@ namespace Bank_Account
         //Shows Account  name/number
         public string ShowReserveInfo()
         {
-            return base.ShowInfo() + "   " + "\nAccount Type: " + "Reserve";
+            return "   " + "\nAccount Type: " + "Reserve";
         }
         //Shows balance
         public string ShowBalance()
@@ -51,13 +51,13 @@ namespace Bank_Account
         public string DepositMoney()
         {
             balance = Balance + Deposit;
-            return "+$" + String.Format("{0:0.00}", Deposit) + "\tChecking Account Balance: $" + String.Format("{0:0.00}", Balance);
+            return "+$" + String.Format("{0:0.00}", Deposit) + "\tReserve Account Balance: $" + String.Format("{0:0.00}", Balance);
         }
         //returns string with withdrawl/balance
         public string WithdrawMoney()
         {
             balance = Balance - Withdrawl;
-            return "-$" + String.Format("{0:0.00}", Withdrawl) + "\tChecking Account Balance: $" + String.Format("{0:0.00}", Balance);
+            return "-$" + String.Format("{0:0.00}", Withdrawl) + "\tReserve Account Balance: $" + String.Format("{0:0.00}", Balance);
         }
     }
 }

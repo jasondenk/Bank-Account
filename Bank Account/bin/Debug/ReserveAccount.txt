@@ -1,2 +1,7 @@
-Name: Yogi Bear    
-Account Number: 12345678
+Name: jason d    
+Account Number: 09876543   
+Account Type: Reserve
+1/29/2017 6:42:55 PM
++$2.00	Reserve Account Balance: $2.00
+1/29/2017 6:43:38 PM
+-$0.02	Reserve Account Balance: $1.98

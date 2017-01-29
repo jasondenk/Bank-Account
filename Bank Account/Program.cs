@@ -12,7 +12,11 @@ namespace Bank_Account
         static void Main(string[] args)
         {
             //instantiate Account
-            CheckingAccount account = new CheckingAccount();
+            Account account = new Account();
+            //Gets name/number of account
+            account.AskFirstName();
+            account.AskLastName();
+            account.AskAccountNumber();
             //instantiate Checking Account
             CheckingAccount checkingAccount = new CheckingAccount();
             // Create an instance of StreamWriter to write to a Checking Account file
@@ -21,7 +25,7 @@ namespace Bank_Account
             using (checking)
             {
                 //write name and account #
-                checking.WriteLine(checkingAccount.ShowCheckingInfo());
+                checking.WriteLine(account.ShowInfo()+checkingAccount.ShowCheckingInfo());
             }
             //instantiate Savings Account
             SavingsAccount savingsAccount = new SavingsAccount();
@@ -31,17 +35,17 @@ namespace Bank_Account
             using (savings)
             {
                 //write name and account #
-                savings.WriteLine(savingsAccount.ShowInfo());
+                savings.WriteLine(account.ShowInfo() + savingsAccount.ShowSavingsInfo());
             }
             //instantiate Reserve Account
-            CheckingAccount reserveAccount = new CheckingAccount();
+            ReserveAccount reserveAccount = new ReserveAccount();
             // Create an instance of StreamWriter to write to a file
             StreamWriter reserve = new StreamWriter(@"C:\Users\WeCanCodeIT\Documents\Visual Studio 2015\Projects\Bank Account\Bank Account\bin\Debug\ReserveAccount.txt");
             //writes name and account number automatically when program starts, the using statement will auto-close the file for us
             using (reserve)
             {
                 //write name and account #
-                reserve.WriteLine(reserveAccount.ShowInfo());
+                reserve.WriteLine(account.ShowInfo() + reserveAccount.ShowReserveInfo());
             }
 
         //goto Start if invalid response
@@ -228,7 +232,7 @@ namespace Bank_Account
                             }
                             //updates withdrawl value in Reserve Account Class
                             reserveAccount.Withdrawl = double.Parse(transaction);                            
-                            using (checking = File.AppendText(@"C:\Users\WeCanCodeIT\Documents\Visual Studio 2015\Projects\Bank Account\Bank Account\bin\Debug\ReserveAccount.txt"))
+                            using (reserve = File.AppendText(@"C:\Users\WeCanCodeIT\Documents\Visual Studio 2015\Projects\Bank Account\Bank Account\bin\Debug\ReserveAccount.txt"))
                             {
                                 //withdrawl and update balance
                                 reserve.WriteLine(DateTime.Now);

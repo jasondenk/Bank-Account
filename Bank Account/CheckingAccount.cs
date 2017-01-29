@@ -40,7 +40,7 @@ namespace Bank_Account
         //methods
         public string ShowCheckingInfo()
         {
-            return base.ShowInfo()+ "   "+ "\nAccount Type: " + "Checking";
+            return "   "+ "\nAccount Type: " + "Checking";
         }
         //Shows balance
         public string ShowBalance()
