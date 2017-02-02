@@ -75,6 +75,7 @@ namespace Bank_Account
                 //Show Account name and number
                 if (input == "1")
                 {
+                    Console.WriteLine("\n\n");
                     Console.WriteLine(account.ShowInfo());
                     Console.WriteLine("\n\n\nType any key to see menu.");
                     Console.ReadKey();
